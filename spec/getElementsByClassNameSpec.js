@@ -16,8 +16,14 @@ describe('getElementsByClassName', function() {
       var $rootElement = $(htmlString);
       $('body').append($rootElement);
 
-      var result = getElementsByClassName('targetClassName');
       var expectedNodeList = document.getElementsByClassName('targetClassName');
+
+
+      // I changed this assignment's function to include a second parameter
+      // The first argument is the node to be traversed;
+      // The second argument is the desired class name
+      // I couldn't think of another way to do this recursively
+      var result = getElementsByClassName(document.body, 'targetClassName');
       var expectedArray = Array.prototype.slice.apply(expectedNodeList);
       var equality = _.isEqual(result, expectedArray); // why can't we use `===` here?
       expect(equality).to.equal(true);
